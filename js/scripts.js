@@ -7,10 +7,11 @@ function scroll(){
 document.addEventListener('DOMContentLoaded', scroll, false);
 
 $('#tab-bar a').on('click', function(e){
-    e.preventDefault();
-    var nextPage = $(e.target.hash);
-    $("#pages .current").removeClass("current");
-    nextPage.addClass("current");
+	e.preventDefault();
+	var nextPage = $(e.target.hash);
+	page(nextPage); //You need to add this for it to work
+	$("#pages .current").removeClass("current");
+	nextPage.addClass("current");
 });
 
 function page(toPage) {
