@@ -12,3 +12,13 @@ $('#tab-bar a').on('click', function(e){
     $("#pages .current").removeClass("current");
     nextPage.addClass("current");
 });
+
+function page(toPage) {
+    var toPage = $(toPage),
+    fromPage = $("#pages .current");
+    toPage.addClass("current fade in").one("webkitAnimationEnd", function(){
+        fromPage.removeClass("current fade out");
+        toPage.removeClass("fade in")
+    });
+    fromPage.addClass("fade out");
+}
