@@ -14,11 +14,23 @@ $('#tab-bar a').on('click', function(e){
 });
 
 function page(toPage) {
-    var toPage = $(toPage),
-    fromPage = $("#pages .current");
-    toPage.addClass("current fade in").one("webkitAnimationEnd", function(){
-        fromPage.removeClass("current fade out");
-        toPage.removeClass("fade in")
-    });
-    fromPage.addClass("fade out");
-}
+	var toPage = $(toPage),
+	fromPage = $("#pages .current");
+	// Halt on existing item click
+	if(toPage.hasClass("current") || toPage === fromPage) {
+		return;
+	};
+	// Fade out existing page, on complete fade in destiation content
+	$("#pages .current").addClass("fade out").one("webkitAnimationEnd", function(){
+		$(this).removeClass("current fade out in");
+		toPage.addClass("current fade in").one();
+	});
+};
+
+// Primary navigation
+$('#tab-bar a').on('click', function(e){
+	e.preventDefault();
+	// Grab and pass existing and destination pages
+	var nextPage = $(e.target.hash);
+	page(nextPage);
+});
